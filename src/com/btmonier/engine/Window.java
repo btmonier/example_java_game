@@ -10,6 +10,9 @@ public class Window {
     private BufferedImage image;
     private Canvas canvas;
     private BufferStrategy bs;
+
+
+
     private Graphics g;
 
 
@@ -38,5 +41,13 @@ public class Window {
     public void update() {
         g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
         bs.show();
+    }
+
+    public BufferedImage getImage() {
+        return image;
+    }
+
+    public Canvas getCanvas() {
+        return canvas;
     }
 }
