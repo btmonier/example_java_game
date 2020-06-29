@@ -21,9 +21,11 @@ public class GameContainer implements Runnable {
     public void run() {
         running = true;
 
+        double convert = 1e9;
+
         boolean render = false;
         double firstTime = 0;
-        double lastTime = System.nanoTime() / 1000000000.0;
+        double lastTime = System.nanoTime() / convert;
         double passedTime = 0;
         double unprocessedTime = 0;
 
@@ -33,7 +35,7 @@ public class GameContainer implements Runnable {
 
         while(running) {
             render = false;
-            firstTime = System.nanoTime() / 1000000000.0;
+            firstTime = System.nanoTime() / convert;
             passedTime = firstTime - lastTime;
             lastTime = firstTime;
 
