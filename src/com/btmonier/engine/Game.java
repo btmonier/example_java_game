@@ -12,6 +12,9 @@ public class Game implements Runnable {
     private BufferStrategy bs;
     private Graphics g;
 
+    //  States
+    private State gameState;
+
     public Game(String title, int width, int height) {
         this.width = width;
         this.height = height;
@@ -22,14 +25,15 @@ public class Game implements Runnable {
     private void init() {
         display = new Display(title, width, height);
         Assets.init();
+        gameState = new GameState();
+        State.setState(gameState);
     }
 
     // Game loop (1) - update (e.g. tick()) AND...
-    int x = 0;
-    int y = 0;
     private void tick() {
-        x += 1;
-        y += 1;
+        if (State.getState() != null) {
+            State.getState().tick();
+        }
     }
     // Game Loop (2) - draw stuff to screen (e.g. render())
     // Buffer - a "hidden" computer screen within your computer...
@@ -46,7 +50,9 @@ public class Game implements Runnable {
         g.clearRect(0, 0, width, height);
 
         // Draw some stuff...
-        g.drawImage(Assets.heavy, x, y, null);
+        if (State.getState() != null) {
+            State.getState().render(g);
+        }
         // End draw
 
         // Return display
