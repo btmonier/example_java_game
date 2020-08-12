@@ -1,5 +1,11 @@
 package com.btmonier.engine;
 
+import com.btmonier.engine.display.Display;
+import com.btmonier.engine.graphics.Assets;
+import com.btmonier.engine.input.KeyManager;
+import com.btmonier.engine.state.GameState;
+import com.btmonier.engine.state.State;
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
@@ -14,23 +20,30 @@ public class Game implements Runnable {
 
     //  States
     private State gameState;
+    private State menuState;
+
+    // Input
+    private KeyManager keyManager;
 
     public Game(String title, int width, int height) {
         this.width = width;
         this.height = height;
         this.title = title;
+        keyManager = new KeyManager();
     }
 
     // Initialize thread
     private void init() {
         display = new Display(title, width, height);
+        display.getFrame().addKeyListener(keyManager);
         Assets.init();
-        gameState = new GameState();
+        gameState = new GameState(this);
         State.setState(gameState);
     }
 
     // Game loop (1) - update (e.g. tick()) AND...
     private void tick() {
+        keyManager.tick();
         if (State.getState() != null) {
             State.getState().tick();
         }
@@ -93,6 +106,10 @@ public class Game implements Runnable {
         }
 
         stop();
+    }
+
+    public KeyManager getKeyManager() {
+        return keyManager;
     }
 
     // synchronized - working with threads DIRECTLY
