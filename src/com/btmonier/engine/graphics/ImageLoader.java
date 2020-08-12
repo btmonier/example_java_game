@@ -1,4 +1,4 @@
-package com.btmonier.engine;
+package com.btmonier.engine.graphics;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

@@ -1,4 +1,6 @@
-package com.btmonier.engine;
+package com.btmonier.engine.state;
+
+import com.btmonier.engine.Game;
 
 import java.awt.*;
 
@@ -14,6 +16,12 @@ public abstract class State {
     }
 
     // CLASS
+    protected Game game;
+
+    public State(Game game) {
+        this.game = game;
+    }
+
     public abstract void tick();
 
     public abstract void render(Graphics g);
