@@ -5,6 +5,6 @@ import com.btmonier.engine.graphics.Assets;
 public class GrassTile extends Tile {
 
     public GrassTile(int id) {
-        super(Assets.grass, id);
+        super(Assets.grassLight, id);
     }
 }
